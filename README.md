@@ -1,3 +1,4 @@
+every user has to run Apache and Mysql server in xampp/wamp application then proceed with login.php page.
 User can register and can login if already registered.After login user will forwarded to Dashboard page where there will be a selectbox 
 where user can select the categories according to choice of article user wants to look at, if no article found then it simply shows nothing.
 The Different Sidebar links on Dashboard are :
