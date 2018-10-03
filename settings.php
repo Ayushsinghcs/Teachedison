@@ -1,3 +1,120 @@
+<html>
+<head>
+  <script>
+  function validateForm()
+  {
+      var firstname = document.forms["form1"]["firstname"];
+      var lastname = document.forms["form1"]["lastname"];
+      var phone = document.forms["form1"]["phone"];
+      var email = document.forms["form1"]["email"];
+      var password = document.forms["form1"]["password"];
+      var confirm_password = document.forms["form1"]["confirm_password"];
+      var enr =  form1.elements["enr[]"];
+      var dob = document.forms["form1"]["DOB"];
+      var pattern =/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
+
+
+      if (firstname.value == "")
+      {
+          window.alert("Please enter your Firstname.");
+          firstname.focus();
+          return false;
+      }
+      if (lastname.value == "")
+      {
+          window.alert("Please enter your Lastname.");
+          lastname.focus();
+          return false;
+      }
+      if (phone.value == "")
+      {
+          window.alert("Please enter your phone number.");
+          phone.focus();
+          return false;
+      }
+
+      if(phone.value.length!=10){
+
+        alert("Please enter a 10 digit phone number");
+        phone.focus();
+        return false;
+      }
+      if (isNaN(phone.value))
+      {
+          alert("Please enter phone number in digit");
+          phone.focus();
+          return false;
+      }
+
+      if (email.value == "")
+      {
+          window.alert("Please enter a valid e-mail address.");
+          email.focus();
+          return false;
+      }
+
+      if (email.value.indexOf("@", 0) < 0)
+      {
+          window.alert("Please enter a valid e-mail address.");
+          email.focus();
+          return false;
+      }
+
+      if (email.value.indexOf(".", 0) < 0)
+      {
+          window.alert("Please enter a valid e-mail address.");
+          email.focus();
+          return false;
+      }
+      if (dob.value == "")
+      {
+          window.alert("Please enter DOB");
+          dob.focus();
+          return false;
+      }
+      if (dob.value == null || dob.value == "" || !pattern.test(dob.value)) {
+        window.alert("Invalid DOB");
+        dob.focus();
+        return false;
+        }
+
+      if (password.value == "")
+      {
+          window.alert("Please enter your password");
+          password.focus();
+          return false;
+      }
+
+      if (confirm_password.value == "")
+      {
+          window.alert("Please enter your confirm password");
+          confirm_password.focus();
+          return false;
+      }
+     if(password.value != confirm_password.value )
+     {
+       window.alert("Password aren't matching ");
+       confirm_password.focus();
+       return false;
+     }
+      // if (enr[].selectedIndex < 1)
+      //    {
+      //        alert("Please enter your course.");
+      //        enr[].focus();
+      //        return false;
+      //    }
+      if (enr.selectedIndex == -1) {
+        alert("Please select an item.");
+        enr.focus();
+        return false;
+      }
+
+      return true;
+  }
+</script>
+</head>
+<body>
+
 <?php
 session_start();
 if(!isset($_SESSION['email']))
@@ -49,7 +166,7 @@ $result= $conn->query($sql);
 $row=$result->fetch_array()
 ?>
                                         <section class="login_content" style="margin-top: -40px;">
-                                            <form name="form1" action="" method="post">
+                                            <form name="form1" action="" method="post" onsubmit = "return validateForm()">
                                                 <h2>Your Profile</h2><br>
 
                                                 <div>
@@ -126,3 +243,5 @@ $row=$result->fetch_array()
 <?php
 include "footer.php";
 ?>
+</body>
+</html>
